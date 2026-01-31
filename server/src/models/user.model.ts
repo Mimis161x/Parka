@@ -6,7 +6,7 @@ export interface IUser extends Document {
     username: string;
     email: string;
     password: string;
-    role: 'driver' | 'owner';
+    role: 'client' | 'owner';
 }
 
 const UserSchema = new Schema({
