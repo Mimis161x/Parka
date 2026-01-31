@@ -1,5 +1,5 @@
 import BookingModel from '../models/booking.model';
-import  PlaceModel from '../models/place.model';
+import  PlaceModel from '../models/park.model';
 import { z } from 'zod';
 
 export const CreateBookingSchema = z.object({

@@ -1,14 +1,14 @@
-import placeModel from '../models/place.model';
+import placeModel from '../models/park.model';
 import { z } from 'zod';
 
-export const CreateSpotSchema = z.object({
+export const CreateParkSchema = z.object({
     address: z.string().min(5),
     description: z.string().optional(),
     pricePerHour: z.number().min(0.5),
 });
 
 export class SpotService {
-    async createSpot(data: z.infer<typeof CreateSpotSchema>, ownerId: string) {
+    async createSpot(data: z.infer<typeof CreateParkSchema>, ownerId: string) {
         const spot = await placeModel.create({
             ...data,
             owner: ownerId,
