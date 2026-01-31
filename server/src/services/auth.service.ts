@@ -1,4 +1,4 @@
-import UserSchema from "../models/user.model";
+import UserModel from "../models/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {z} from "zod";
@@ -17,17 +17,17 @@ export const LoginSchema = z.object({
 
 export class AuthService {
     async register(data: z.infer<typeof SignupSchema>) {
-        const existingUser = await UserSchema.findOne({ email: data.email } as any);
+        const existingUser = await UserModel.findOne({ email: data.email } as any);
         if (existingUser) throw new Error("Το email χρησιμοποείται");
 
         const hashedPassword = await bcrypt.hash(data.password, 10);
-        const user = await UserSchema.create({ ...data, password: hashedPassword } as any);
+        const user = await UserModel.create({ ...data, password: hashedPassword } as any);
 
         return { id: user._id, email: user.email, role: user.role };
     }
 
     async login(data: z.infer<typeof LoginSchema>) {
-        const user = await UserSchema.findOne({ email: data.email } as any);
+        const user = await UserModel.findOne({ email: data.email } as any);
         if (!user) throw new Error("Λάθος credentials.");
 
         const isMatch = await bcrypt.compare(data.password, user.password);
