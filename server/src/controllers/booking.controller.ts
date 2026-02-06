@@ -6,31 +6,34 @@ const bookingService = new BookingService();
 /**
  * @swagger
  * tags:
- * name: Bookings
- * description: Κρατήσεις
+ *   name: Bookings
+ *   description: Κρατήσεις
  */
 
 /**
  * @swagger
  * /api/bookings:
- * post:
- * summary: Κράτηση θέσης
- * tags: [Bookings]
- * security:
- * - bearerAuth: []
- * requestBody:
- * required: true
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * spotId: { type: string }
- * startTime: { type: string }
- * endTime: { type: string }
- * responses:
- * 201:
- * description: Η κράτηση έγινε
+ *   post:
+ *     summary: Κράτηση θέσης
+ *     tags: [Bookings]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               spotId:
+ *                 type: string
+ *               startTime:
+ *                 type: string
+ *               endTime:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Η κράτηση έγινε
  */
 export const createBooking = async (req: Request, res: Response) => {
     try {
@@ -46,14 +49,14 @@ export const createBooking = async (req: Request, res: Response) => {
 /**
  * @swagger
  * /api/bookings/my-bookings:
- * get:
- * summary: Οι κρατήσεις μου
- * tags: [Bookings]
- * security:
- * - bearerAuth: []
- * responses:
- * 200:
- * description: Ιστορικό
+ *   get:
+ *     summary: Οι κρατήσεις μου
+ *     tags: [Bookings]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Ιστορικό
  */
 export const getMyBookings = async (req: Request, res: Response) => {
     try {

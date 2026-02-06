@@ -6,32 +6,41 @@ const authService = new AuthService();
 /**
  * @swagger
  * tags:
- * name: Auth
- * description: Διαχείριση χρηστών
+ *   name: Auth
+ *   description: Διαχείριση χρηστών
  */
 
 /**
  * @swagger
  * /api/auth/register:
- * post:
- * summary: Εγγραφή νέου χρήστη
- * tags: [Auth]
- * requestBody:
- * required: true
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * username: { type: string }
- * email: { type: string }
- * password: { type: string }
- * role: { type: string, enum: [client, owner] }
- * responses:
- * 201:
- * description: Επιτυχής εγγραφή
- * 400:
- * description: Σφάλμα
+ *   post:
+ *     summary: Εγγραφή νέου χρήστη
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - username
+ *               - email
+ *               - password
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               role:
+ *                 type: string
+ *                 enum: [driver, owner]
+ *     responses:
+ *       201:
+ *         description: Επιτυχής εγγραφή
+ *       400:
+ *         description: Σφάλμα validation
  */
 export const register = async (req: Request, res: Response) => {
     try {
@@ -46,23 +55,28 @@ export const register = async (req: Request, res: Response) => {
 /**
  * @swagger
  * /api/auth/login:
- * post:
- * summary: Σύνδεση χρήστη
- * tags: [Auth]
- * requestBody:
- * required: true
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * email: { type: string }
- * password: { type: string }
- * responses:
- * 200:
- * description: Επιτυχής σύνδεση
- * 401:
- * description: Λάθος credentials
+ *   post:
+ *     summary: Σύνδεση χρήστη
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Επιτυχής σύνδεση
+ *       401:
+ *         description: Λάθος στοιχεία
  */
 export const login = async (req: Request, res: Response) => {
     try {
