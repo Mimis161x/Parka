@@ -25,11 +25,11 @@ const spotService = new SpotService();
  *             type: object
  *             required:
  *               - address
- *               - pricePerHour
+ *               - price
  *             properties:
  *               address:
  *                 type: string
- *               pricePerHour:
+ *               price:
  *                 type: number
  *               description:
  *                 type: string

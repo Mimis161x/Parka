@@ -18,15 +18,15 @@ export class BookingService {
 
         if (start >= end) throw new Error("Η ώρα λήξης πρέπει να είναι μετά την έναρξη");
 
-        const price = (spot as any).pricePerHour;
+        const pricePerUnit = (spot as any).price;
         const hours = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
-        const totalPrice = hours * price;
+        const totalPrice = hours * pricePerUnit;
 
         const booking = await BookingModel.create({
-            driver: driverId,
-            spot: data.spotId,
-            startTime: start,
-            endTime: end,
+            user: driverId,
+            place: data.spotId,
+            startTimestamp: start,
+            endTimestamp: end,
             totalPrice: totalPrice.toFixed(2),
             status: 'active'
         } as any);
@@ -35,8 +35,8 @@ export class BookingService {
     }
 
     async getUserBookings(userId: string) {
-        return BookingModel.find({driver: userId} as any)
-            .populate('spot', 'address pricePerHour')
+        return BookingModel.find({user: userId} as any)
+            .populate('place', 'address pricePerHour')
             .sort({createdAt: -1});
     }
 }
